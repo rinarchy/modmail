@@ -4,7 +4,243 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project mostly adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html);
-however, insignificant breaking changes do not guarantee a major version bump, see the reasoning [here](https://github.com/kyb3r/modmail/issues/319). If you're a plugins developer, note the "BREAKING" section.
+however, insignificant breaking changes do not guarantee a major version bump, see the reasoning [here](https://github.com/kyb3r/modmail/issues/319). If you're a plugin developer, note the "BREAKING" section.
+
+# v3.8.2
+
+### Fixed
+
+- Retry with `null-discrim` if channel could not be created. ([GH #2934](https://github.com/kyb3r/modmail/issues/2934))
+- Fix update notifications.
+- Retrieve user from Discord API if user has left the server, resolving issues in `?block`. ([GH #2935](https://github.com/kyb3r/modmail/issues/2935), [PR #2936](https://github.com/kyb3r/modmail/pull/2936))
+- IDs in `<member>` commands work now.
+
+# v3.8.1
+
+### Fixed
+
+- Additional image uploads now render properly. ([PR #2933](https://github.com/kyb3r/modmail/pull/2933))
+- `confirm_thread_creation` no longer raises unnecessary errors. ([GH #2931](https://github.com/kyb3r/modmail/issues/2931), [PR #2933](https://github.com/kyb3r/modmail/pull/2933))
+- Autotriggers no longer sends attachments back. ([GH #2932](https://github.com/kyb3r/modmail/issues/2932))
+
+# v3.8.0
+
+### Added
+
+- `update_notifications` configuration option to toggle bot autoupdate notifications. ([GH #2896](https://github.com/kyb3r/modmail/issues/2896))
+- `?fareply`, anonymously reply with variables.
+- `anonymous_snippets` config variable to toggle if snippets should be anonymous. ([GH #2905](https://github.com/kyb3r/modmail/issues/2905))
+- `disable_updates` config variable to control if the update command should be disabled or not.
+- `silent_alert_on_mention` to alert mods silently. ([GH #2907](https://github.com/kyb3r/modmail/issues/2907))
+- Support for only the "Server Members" intent.
+
+### Improved
+
+- Added command validation to `autotrigger add/edit`.
+- `GITHUB_TOKEN` is now no longer required in Heroku setups.
+- Clearer error messages on reply fails.
+
+### Fixed
+
+- Mentioned `competing` as an activity type. ([PR #2902](https://github.com/kyb3r/modmail/pull/2902))
+- Level permissions were not checked if command permissions were set.
+- Regex autotriggers were not working if term was in the middle of strings.
+- `?blocked` now no longers show blocks that have expired.
+- Blocked roles will no longer trigger an error during unblock.
+- Custom emojis are now supported in `confirm_thread_creation_deny`. ([GH #2916](https://github.com/kyb3r/modmail/issues/2916))
+- Finding linked messages in replies work now. ([GH #2920](https://github.com/kyb3r/modmail/issues/2920), [Jerrie-Aries](https://github.com/kyb3r/modmail/issues/2920#issuecomment-751530495))
+- Sending files in threads (non-images) now work. ([GH #2926](https://github.com/kyb3r/modmail/issues/2926))
+- Deleting messages no longer shows a false error. ([GH #2910](https://github.com/kyb3r/modmail/issues/2910), [Jerrie-Aries](https://github.com/kyb3r/modmail/issues/2910#issuecomment-753557313))
+- Display an error on [Lottie](https://airbnb.io/lottie/#/) stickers, instead of failing the send.
+- `?perms get` now shows role/user names. ([PR #2927](https://github.com/kyb3r/modmail/pull/2927))
+
+### Internal
+
+- Make use of `git branch --show-current` to retrieve branch instead of using prerelease version check.
+- Use discord.py 1.6.0 from PyPi instead of the development clone.
+
+# v3.7.13
+
+### Fixed
+
+- Notes in config help are now optional.
+
+# v3.7.12
+
+### Fixed
+
+- Bot was not responding to union errors.
+- `?block [reason]` now works in threads.
+
+# v3.7.11
+
+### Improved
+
+- Role block will now work better with seperate server setups.
+
+### Fixed
+
+- Bot not restarting after autoupdate on PM2.
+
+### Internal
+
+- Removed unnecessary loggings.
+
+# v3.7.10
+
+### Added
+
+- Added `update_channel_id` to specify which channel autoupdate notifications were being sent to.
+- Added `show_timestamp` to specify if timestamps should be displayed in message embeds. ([GH #2885](https://github.com/kyb3r/modmail/issues/2885))
+
+# v3.7.9
+
+### Fixed
+
+- `perms add/remove` with permission levels should now work again. ([GH #2892](https://github.com/kyb3r/modmail/issues/2892), [PR #2893](https://github.com/kyb3r/modmail/pull/2893))
+
+### Improved
+
+- Clearer plugin debug messages when plugins are disabled
+
+# v3.7.8
+
+### Added
+
+- Added `thread_contact_silently` to allow opening threads silently by default. ([PR #2887](https://github.com/kyb3r/modmail/pull/2887))
+
+### Fixed
+- Permission levels were not respected.
+- `perms remove` was not working.
+- `logs` and `block` would not recognise users in a seperate server setup.
+- Custom emojis were not working with `confirm_thread_creation`.
+
+### Internal
+- Optimised `perms get`, bot should respond faster now.
+
+# v3.7.7
+
+### Added
+
+- Added updating github fork if GITHUB_TOKEN was provided
+
+### Fixed
+
+- Skip blocked roles check if user is not in main guild.
+
+# v3.7.6
+
+### Fixed
+
+- Autoupdate persists despite errors.
+- Mention when normal thread created was not working. ([GH #2883](https://github.com/kyb3r/modmail/issues/2883))
+
+# v3.7.5
+
+### Fixed
+
+- Close on emoji was not working.
+
+# v3.7.3
+
+### Fixed
+
+- React to contact threads were treated like normal contact threads. ([GH #2881](https://github.com/kyb3r/modmail/issues/2881))
+
+# v3.7.2
+
+### Added
+
+- Added `mention_channel_id` to specify which channel `alert_on_mention` was being sent to. ([GH #2880](https://github.com/kyb3r/modmail/issues/2880))
+
+### Fixed
+
+- `?config set` would not respond if an invalid key was provided.
+
+# v3.7.1
+
+### Fixed
+
+- Bot will now leave a reaction on the react to contact message.
+- Added docstring to selfcontact
+
+# v3.7.0
+
+### Added
+
+- Plain replies functionality. Added commands `preply`, `pareply` and config `plain_reply_without_command`. ([GH #2872](https://github.com/kyb3r/modmail/issues/2872))
+- Added `react_to_contact_message`, `react_to_contact_emoji` to allow users to create threads by reacting to a message.
+- Added `thread_move_notify_mods` to mention all mods again after moving thread. ([GH #215](https://github.com/kyb3r/modmail/issues/215))
+- Added `transfer_reactions` to link reactions between mods and users. ([GH #2763](https://github.com/kyb3r/modmail/issues/2763))
+- Added `close_on_leave`, `close_on_leave_reason` to automatically close threads upon recipient leaving the server. ([GH #2757](https://github.com/kyb3r/modmail/issues/2757))
+- Added `alert_on_mention` to mention mods upon a bot mention. ([GH #2833](https://github.com/kyb3r/modmail/issues/2833))
+- Added `confirm_thread_creation`, `confirm_thread_creation_title`, `confirm_thread_response`, `confirm_thread_creation_accept`, `confirm_thread_creation_deny` to allow users to confirm that they indeed want to create a new thread. ([GH #2773](https://github.com/kyb3r/modmail/issues/2773))
+- Support Gyazo image links in message embeds. ([GH #282](https://github.com/kyb3r/modmail/issues/282))
+- Added `silent` argument to `?contact` to restore old behaviour.
+- Added new functionality: If `?help` is sent, bot does checks on every command, `?help all` restores old behaviour. ([GH #2847](https://github.com/kyb3r/modmail/issues/2847))
+- Added a way to block roles. ([GH #2753](https://github.com/kyb3r/modmail/issues/2753))
+- Added `cooldown_thread_title`, `cooldown_thread_response` to customise message sent when user is on a creating thread cooldown. ([GH #2865](https://github.com/kyb3r/modmail/issues/2865))
+- Added `?selfcontact` to allow users to open a thread. ([GH #2762](https://github.com/kyb3r/modmail/issues/2762))
+- Support stickers and reject non-messages. (i.e. pin_add)
+- Added support for thread titles, `?title`. ([GH #2838](https://github.com/kyb3r/modmail/issues/2838))
+- Added `data_collection` to specify if bot metadata should be collected by Modmail developers.
+- Added `?autotrigger`, `use_regex_autotrigger` config to specify keywords to trigger commands. ([GH #130](https://github.com/kyb3r/modmail/issues/130), [GH #649](https://github.com/kyb3r/modmail/issues/649))
+- Added `?note persistent` that creates notes that are persistent for a user. ([GH #2842](https://github.com/kyb3r/modmail/issues/2842), [PR #2878](https://github.com/kyb3r/modmail/pull/2878))
+- Autoupdates and `?update` which was removed in v3.0.0
+
+### Fixed
+
+- `?contact` now sends members a DM.
+- `level_permissions` and `command_permissions` would sometimes be reset. ([GH #2856](https://github.com/kyb3r/modmail/issues/2856))
+- Command truncated after && in alias. ([GH #2870](https://github.com/kyb3r/modmail/issues/2870))
+- `on_plugins_ready` event for plugins works now.
+
+### Improved
+
+- Plugins installations have clearer error messages.
+- `?move` now does not require exact category names, accepts case-insensitive and startswith names.
+
+### Internal
+- Use enums in config. ([GH #2821](https://github.com/kyb3r/modmail/issues/2821))
+- `on_thread_close` event for plugins.
+- `on_thread_reply` event for plugins.
+
+# v3.6.2
+
+### Fixed
+
+- Plugins downloading requirements in virtual environments.
+
+
+# v3.6.1
+
+### Added
+
+- Proper error message if privileged intents not explicitly granted to bot.
+
+
+# v3.6.0
+
+### Added
+
+- Added `thread_move_title` to specify title of thread moved embed.
+- Mark NSFW logs in log message. ([GH #2792](https://github.com/kyb3r/modmail/issues/2792))
+- Icon for moderator that closed the thread in log message. ([GH #2828](https://github.com/kyb3r/modmail/issues/2828))
+- Ability to set mentions via user/role ID. ([GH #2796](https://github.com/kyb3r/modmail/issues/2796))
+
+### Changed
+
+- `?move` now consumes rest in category name, which means `?move Long Category Name` works without quotes!
+- `?help` shows "No command description" if no description provided. ([PR #2845](https://github.com/kyb3r/modmail/pull/2845))
+
+### Fixed
+- Unicode errors raised during windows selfhosting
+
+### Internal
+
+- Bump discord.py version to 1.5.1
+- Explicitly state intents used for connection
+- Use `--diff` for black CI instead of `--check` ([GH #2816](https://github.com/kyb3r/modmail/issues/2816))
 
 
 # v3.5.0
@@ -14,7 +250,7 @@ Fixed discord.py issue.
 ### Added
 
 - A confirmation when you manually delete a thread message embed.
-- Config var `enable_eval` defaults true, set `enable_eval=no` to disable the eval command. (GH #2803)
+- Config var `enable_eval` defaults true, set `enable_eval=no` to disable the eval command. ([GH #2803](https://github.com/kyb3r/modmail/issues/2803))
 - Added `?plugins reset` command to completely reset everything related to plugins. This will fix some problems caused by broken plugins in the file system.
 - Support private GitHub repos for plugins (thanks to @officialpiyush pr#2767)
 
